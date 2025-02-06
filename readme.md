@@ -1,6 +1,6 @@
 # Kiwistand
 
-![Node.js badge](https://github.com/attestate/kiwistand/actions/workflows/node.js.yml/badge.svg)
+[![Node.js badge](https://github.com/attestate/kiwistand/actions/workflows/node.js.yml/badge.svg)](https://github.com/attestate/kiwistand/actions/workflows/node.js.yml)
 
 Kiwistand is a P2P node client for a web3-friendly Hacker News that nobody controls but everybody co-owns.
 
