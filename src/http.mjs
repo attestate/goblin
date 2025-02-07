@@ -124,6 +124,33 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+// NOTE: We use s-maxage for Cloudflare CDN caching, while max-age controls browser caching
+app.get("/.well-known/apple-app-site-association", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.setHeader("Cache-Control", "public, s-maxage=86400, max-age=86400, stale-while-revalidate=600000");
+  res.json({
+    "webcredentials": {
+      "apps": [
+        "SKFAD6UPBF.attestate.Kiwi-News-iOS"
+      ]
+    },
+    "applinks": {
+      "apps": [],
+      "details": [
+        {
+          "appIDs": ["SKFAD6UPBF.attestate.Kiwi-News-iOS"],
+          "components": [
+            {
+              "/": "/*",
+              "comment": "Matches all URLs"
+            }
+          ]
+        }
+      ]
+    }
+  });
+});
+
 function loadTheme(req, res, next) {
   res.locals.theme = theme;
   next();
