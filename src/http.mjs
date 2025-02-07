@@ -1,4 +1,10 @@
 //@format
+
+// NOTE: Throughout this file we use Cloudflare-specific cache control headers:
+// - s-maxage: Controls Cloudflare CDN caching duration
+// - stale-while-revalidate: We implement a custom worker on news.kiwistand.com 
+//   to handle stale-while-revalidate since Cloudflare doesn't support this natively
+
 import { env } from "process";
 import { readFile } from "fs/promises";
 import path, { basename } from "path";
