@@ -83,7 +83,11 @@ export const RestoreDialogue = (allowlist, delegations, toast) => {
       const identity = eligible(allowlist, delegations, wallet.address);
       localStorage.setItem(`-kiwi-news-${identity}-key`, decodedData);
       setCookie("identity", identity, tenYearsInSeconds);
-      window.location.pathname = "/";
+      if (props.callback) {
+        props.callback();
+      } else {
+        window.location.pathname = "/";
+      }
     }
 
     if (!featureAvailable || window.location.pathname === "/settings")
