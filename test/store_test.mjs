@@ -1222,7 +1222,7 @@ test("trying to add message to store that isn't on allowlist", async (t) => {
 });
 
 test("adding message from too far into the future", async (t) => {
-  env.MAX_TIMESTAMP_DELTA_SECS = 60;
+  env.MAX_TIMESTAMP_DELTA_SECS = "60";
   const address = "0x0f6A79A579658E401E0B81c6dde1F2cd51d97176";
   const privateKey =
     "0xad54bdeade5537fb0a553190159783e45d02d316a992db05cbed606d3ca36b39";
@@ -1232,7 +1232,7 @@ test("adding message from too far into the future", async (t) => {
   const text = "hello world";
   const href = "https://example.com";
   const type = "amplify";
-  const timestamp = Math.floor(Date.now() / 1000) + 61;
+  const timestamp = (Math.floor(Date.now() / 1000) + 61).toString();
   const message = id.create(text, href, type, timestamp);
   const signedMessage = await id.sign(signer, message, EIP712_MESSAGE);
 
@@ -1275,7 +1275,6 @@ test("adding message from too far into the future", async (t) => {
       ),
   );
 });
-
 test("adding message from before minimum timestamp", async (t) => {
   const address = "0x0f6A79A579658E401E0B81c6dde1F2cd51d97176";
   const privateKey =
@@ -1286,7 +1285,7 @@ test("adding message from before minimum timestamp", async (t) => {
   const text = "hello world";
   const href = "https://example.com";
   const type = "amplify";
-  const timestamp = 0;
+  const timestamp = "0";
   const message = id.create(text, href, type, timestamp);
   const signedMessage = await id.sign(signer, message, EIP712_MESSAGE);
 
@@ -1317,7 +1316,7 @@ test("adding message from before minimum timestamp", async (t) => {
       },
     },
   };
-  env.MIN_TIMESTAMP_SECS = 1;
+  env.MIN_TIMESTAMP_SECS = "1";
   await t.throwsAsync(
     async () =>
       await store.add(
@@ -1330,7 +1329,6 @@ test("adding message from before minimum timestamp", async (t) => {
       ),
   );
 });
-
 test.serial("adding a comment to the store with missing parent", async (t) => {
   store.upvotes.clear();
   t.plan(2);

@@ -105,12 +105,11 @@ test.serial("adding valid message to trie", async (t) => {
   process.env.DATA_DIR = "dbtestA";
   const trie = await store.create();
   const emptyRoot = trie.root();
-  const allowlistFn = () => new Set([address]);
+  const allowlistFn = async () => new Set([address]);
   const result = await handlers.message(trie, allowlistFn)(evt);
   t.true(result);
   await rm("dbtestA", { recursive: true });
 });
-
 test.serial(
   "adding valid message to trie with the signer being a delegated address",
   async (t) => {
@@ -144,8 +143,8 @@ test.serial(
     const emptyRoot = trie.root();
 
     const custodian = "0xee324c588ceF1BF1c1360883E4318834af66366d";
-    const allowlistFn = () => new Set([custodian]);
-    const delegationsFn = () => ({
+    const allowlistFn = async () => new Set([custodian]);
+    const delegationsFn = async () => ({
       [address]: custodian,
     });
     const result = await handlers.message(
@@ -155,5 +154,4 @@ test.serial(
     )(evt);
     t.true(result);
     await rm("dbtestA", { recursive: true });
-  },
-);
+  },);

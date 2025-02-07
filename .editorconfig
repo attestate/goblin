@@ -1,3 +1,9 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+
 [*.{js,jsx,mjs,ejs,yml,json,cpp,cc,h,html,md,sh,sql}]
 indent_style = space
 indent_size = 2
